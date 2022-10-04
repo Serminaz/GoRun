@@ -1,3 +1,4 @@
+/*N - количество работяг которые будут генерировать data*/
 package main
 
 import  (
@@ -23,19 +24,20 @@ func main() {
 	if err != nil {
 		fmt.Println("Нет данных о кол-ве работников!")
 	}
-	wg := sync.WaitGroup{} // объединяет горутины в группы 
-	m := new(sync.Mutex)
+	wg := sync.WaitGroup{}      // объединяет (N)горутин в группу
+	wg.Add(N) 
+    m := new(sync.Mutex)   
 	for i := 0; i < N; i++ {
-		wg.Add(1)      // в группе 1 горутина
+	//	wg.Add(1)               // 1 цикл -> 1 горутина
 		go func(m *sync.Mutex) {
-			m.Lock()
-			AppendToArray()
-			m.Unlock()
-			defer wg.Done()
+			m.Lock()           // блокирует одну из N горутин
+			AppendToArray()    // изменяет значения 
+			m.Unlock()         // отпускает 
+			defer wg.Done()    // элемент группы завершил свое выполнение
 		}(m)
 	}
 
-	wg.Wait()     // ожидаем завершения обоих горутин
+	wg.Wait()                  // ожидаеt завершения всех(N) горутин в wg
 	fmt.Println(arr)
 }
 func init() {
@@ -58,16 +60,8 @@ func randomAge() int {
 }
 func randomHihgt() int {
 	m := 150 + rand.Intn(190-150)
-	h :=  m  
-	return h
+	return m
 }
-// func randomHihgt() int {
-// 	min := 150
-// 	max := 190
-// 	rand.Seed(time.Now().UTC().UnixNano())
-// 	h:= min + rand.Intn(max-min)
-// 	return h
-// }
 
 func   randomName() string {
 	rName := []string {"Eva", "Alica", "Sergey", "Harry Potter","Pupkin", "Sasha" }
@@ -79,7 +73,7 @@ func   randomName() string {
 func ReadingENV(key string) string {
 	err := godotenv.Load(".env")
 	if err != nil {
-		fmt.Println("Нет файла .env")
+		fmt.Println("Error loading .env file")
 	}
 	return os.Getenv(key)
 }
