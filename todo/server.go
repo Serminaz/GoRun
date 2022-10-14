@@ -1,5 +1,6 @@
 package todo
 
+// для запуска http  сервера
 import (
 	"context"
 	"net/http"
@@ -7,19 +8,22 @@ import (
 )
 
 type Server struct { // структура сервер для запуска http server
- httpServer *http.Server
+	httpServer *http.Server
 }
 
-func (s *Server) Run(port string) error {
+func (s *Server) Run(port string, handler http.Handler) error {
 	s.httpServer = &http.Server{
-		Addr:          ":" + port, 
-		MaxHeaderBytes: 1 << 20, // 1MB
+		Addr:           ":" + port, // значение порта на котором будет запускаться сервер
+		Handler:        handler,
+		MaxHeaderBytes: 1 << 20, // 1MB // запуск
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 	}
-	return s.httpServer.ListenAndServe()
+	return s.httpServer.ListenAndServe() // метод станд http servera
+	// под капотом запускает цикл беск и слушает все входящие запросы в о
+	// обработке
 }
 
-func (s *Server) Shutdown(ctx context.Context) error {
+func (s *Server) Shutdown(ctx context.Context) error { // для выхода их приложения
 	return s.httpServer.Shutdown(ctx)
 }
