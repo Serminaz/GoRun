@@ -1,6 +1,6 @@
 package service
 
-import "todo/pkg/repository"
+import "github.com/Serminaz/GoRun/todo2/pkg/repository"
 
 /* сервисы должны уметь общаться с бд  --> в репозитории работа с бд*/
 

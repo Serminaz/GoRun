@@ -1,9 +1,7 @@
- /*Реализовать быструю сортировку массива (quicksort)
+/*Реализовать быструю сортировку массива (quicksort)
   встроенными методами языка.*/
 
-
-
- package main
+package main
 
 import (
 	"fmt"
@@ -22,21 +20,21 @@ func Quicksort(ar []int) {
 
 	split := partition(ar)
 
-	Quicksort(ar[:split]) 
+	Quicksort(ar[:split])
 	Quicksort(ar[split:])
 }
 
 func partition(ar []int) int {
-	pivot := ar[len(ar)/2]   //  опорная точка
+	pivot := ar[len(ar)/2] //  опорная точка
 
 	left := 0
 	right := len(ar) - 1
 
 	for {
-		for ; ar[left] < pivot; left++ {
+		for ; ar[left] < pivot; left++ { // итерируем пока left  не достигнет центра
 		}
 
-		for ; ar[right] > pivot; right-- { 
+		for ; ar[right] > pivot; right-- { // right  не достигнет центра
 		}
 
 		if left >= right {

@@ -1,13 +1,12 @@
 package main
 
-// запуск программы
 import (
+	"github.com/Serminaz/GoRun/todo2"
+	"github.com/Serminaz/GoRun/todo2/pkg/handler"
+	"github.com/Serminaz/GoRun/todo2/pkg/repository"
+	"github.com/Serminaz/GoRun/todo2/pkg/service"
 	"github.com/spf13/viper"
 	"log"
-	"todo"
-	"todo/pkg/handler"
-	"todo/pkg/repository"
-	"todo/pkg/service"
 )
 
 func main() {
