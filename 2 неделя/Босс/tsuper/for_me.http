@@ -1,0 +1,28 @@
+### CREATE EVENT
+POST http://localhost:8080/create_event HTTP/1.1
+
+
+{
+  "id":"8",
+  "date":"2022-02-07",
+  "user_id":"8",
+  "title":"5",
+  "description":"888888"
+}
+
+### DELETE EVENT
+POST http://localhost:8080/delete_event?event_id=5
+{
+  "id":"4fdf6c43-d5d8-4b1f-885e-e6ebea167873"
+}
+
+
+### UPDATE EVENT
+POST http://localhost:8080/update_event HTTP/1.1
+
+{
+  "id": "a4622b9e-741e-4c6e-9511-790f5b9aaa8c",
+  "header": "1",
+  "description":"1",
+  "creator_id": "1"
+}

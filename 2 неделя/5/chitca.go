@@ -9,13 +9,14 @@ func main() {
 
 func input () {
 
-        var input, word, word2, ff string 
+        var input, word, word2, ff, word5 string 
         var end int
         for  end != 2 { 
-                fmt.Println("Введи 3  слова через интер")
+                fmt.Println("Введи 4  слова через интер")
                 fmt.Scanln(&input)
                 fmt.Scanln(&word2) 
                 fmt.Scanln(&word) 
+                fmt.Scanln(&word5) 
                 // vers1
                 output  :=   Reverse1(input)
                 fmt.Println("version(1) ",output)
@@ -26,6 +27,9 @@ func input () {
                 // vers 3
             
                  fmt.Println("version(3) ", Reverse3(word))
+                 
+                 //vers 4
+                 fmt.Println("version(4) ", ReverseString(word5))
 
 
         fmt.Println("желаете продолжить ? (y/n)")
@@ -63,3 +67,12 @@ func Reverse3(s string) (result string) {
         }
         return 
       }
+
+      // ReverseStrint переворачивает строку
+func ReverseString(s string) (result string) {
+	for _, val := range s {
+		// result = Текущий элемент + предыдущий result
+		result = string(val) + result
+	}
+	return
+}
